@@ -1,5 +1,0 @@
-/home/tor/Desktop/Omit
-/var/tmp
-/var/run
-/var/lock
-/var/cache/pacman/pkg
