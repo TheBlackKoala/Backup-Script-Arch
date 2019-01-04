@@ -1,0 +1,4 @@
+/home/tor/Desktop/Omit
+/var/tmp
+/var/run
+/var/lock

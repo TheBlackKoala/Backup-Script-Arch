@@ -1,0 +1,2 @@
+Test old backup deletion
+Get commandline arguments - what to get and what to use?
