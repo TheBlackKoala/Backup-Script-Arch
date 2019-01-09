@@ -82,7 +82,7 @@ function GetName()
 function Backup()
 {
     mkdir -p "$BackupName"
-    if [ -z LastBackUp ]
+    if [ -z $LastBackUp ]
     then
     #Nothing to link to
         res=30
