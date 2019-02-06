@@ -13,8 +13,8 @@ function CheckMount()
 #Find the folder with the last name - this will be the latest backup
 function GetLastBackup()
 {
-    # Be sure to start with null
-    LastBU=""
+    #Reset the last path parameter as it is used in logging
+    Last=""
     # Change to backup directory for current host
     cd "$BackupPath/$BackupFold/$HostName"
     if [ $? -eq 0 ]
@@ -31,7 +31,7 @@ function GetLastBackup()
             LastBackUp="$BackupPath/$BackupFold/$HostName/$Last"
         fi
         # OK get back to wherever we were
-        cd -
+        cd - > /dev/null
     else LastBackUp=""
     fi
     echo "$BackupPath Last: $Last" >> backup.log
@@ -67,14 +67,13 @@ function GetName()
              fi
         fi
         # Get back to wherever we were
-        cd -
+        cd - > /dev/null
         #Write to the log-file
         if [ -z $InComp ]
         then :
         else echo "Using old backup: $InComp on $BackupPath" > backup.log
              echo "Using old backup: $InComp on $BackupPath"
         fi
-    else LastBackUp=""
     fi
 }
 
@@ -82,7 +81,7 @@ function GetName()
 function Backup()
 {
     mkdir -p "$BackupName"
-    if [ -z $LastBackUp ]
+    if [ -z "$LastBackUp" ]
     then
     #Nothing to link to
         res=30
@@ -107,7 +106,7 @@ function Backup()
     #The backup is complete if it worked like it should or if it didn't transfer files that vanished (program files that may have been removed during transfer)
     if [ $res -eq 0 ] || [ $res -eq 24 ]
     then mv -T "$BackupName" "$BackupName.complete"
-         if [ deleteIncomp -gt 0 ]
+         if [ $deleteIncomp -gt 0 ]
          then ls -d */ 2> /dev/null | grep -v ".complete" | xargs rm -rf
          fi
     fi
@@ -117,7 +116,7 @@ function Backup()
 function BackupTest()
 {
     mkdir -p "$BackupName"
-    if [ -z LastBackUp ]
+    if [ -z "$LastBackUp" ]
     then
         #Nothing to link to
         rsync $opts --dry-run --exclude="$excl" $BackupDirs "$BackupName"
