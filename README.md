@@ -15,3 +15,6 @@ When running the system use sudo to access the root directories.
 
 No warranty of any kind at all.
 You may change the script in any way you find suitable, please just give credit.
+
+
+The development of this script was abandoned as each backup only seems to re-use about 50% of backuped items.

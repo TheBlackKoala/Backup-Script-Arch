@@ -181,7 +181,7 @@ function Check()
         zenity --question --text="$Warning$BackupPath$FullWarning" --default-cancel
         if [[ $? == 0 ]]
         then
-            Do the backup anyways.
+            #Do the backup anyways.
             FullBackup
         fi
     Get only the available space and the path then get the line with the path for the drive and get only the available space
